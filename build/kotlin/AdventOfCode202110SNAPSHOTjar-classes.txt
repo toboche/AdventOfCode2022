@@ -1,0 +1,1 @@
+/Users/tomasz.bochenek/Desktop/tomek/repos/AdventOfCode2021/build/classes/kotlin/main/pl/toboche/Day1.class
