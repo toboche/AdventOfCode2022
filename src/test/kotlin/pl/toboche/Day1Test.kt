@@ -1,7 +1,8 @@
 package pl.toboche
 
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import java.io.File
 
 internal class Day1Test {
     @Test
@@ -17,7 +18,17 @@ internal class Day1Test {
                 "260\n" +
                 "263")
             .lines()
-        Assertions.assertEquals(7,
+        assertEquals(7,
+            Day1().task1(input))
+    }
+
+    @Test
+    internal fun task1() {
+        val input = File("src/test/resources/day1Task1.txt")
+            .readText()
+            .lines()
+
+        assertEquals(1713,
             Day1().task1(input))
     }
 }
