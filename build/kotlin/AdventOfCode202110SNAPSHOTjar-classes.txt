@@ -1,1 +1,1 @@
-/Users/tomasz.bochenek/Desktop/tomek/repos/AdventOfCode2021/build/classes/kotlin/main/pl/toboche/Day1.class
+/Users/tomasz.bochenek/Desktop/tomek/repos/AdventOfCode2021/build/classes/kotlin/main/pl/toboche/Day1.class:/Users/tomasz.bochenek/Desktop/tomek/repos/AdventOfCode2021/build/classes/kotlin/main/pl/toboche/Day2$Position.class:/Users/tomasz.bochenek/Desktop/tomek/repos/AdventOfCode2021/build/classes/kotlin/main/pl/toboche/Day2.class
