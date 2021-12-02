@@ -27,4 +27,18 @@ internal class Day2Test {
         assertEquals(1670340,
             Day2().task1(input))
     }
+
+    @Test
+    internal fun task2Example() {
+        val input = ("forward 5\n" +
+                "down 5\n" +
+                "forward 8\n" +
+                "up 3\n" +
+                "down 8\n" +
+                "forward 2")
+            .lines()
+
+        assertEquals(900,
+            Day2().task2(input))
+    }
 }
