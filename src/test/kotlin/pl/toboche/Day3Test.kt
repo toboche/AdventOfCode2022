@@ -59,7 +59,7 @@ internal class Day3Test {
         val input = File("src/test/resources/day3Task1.txt")
             .readLines()
 
-        assertEquals(3895776,
+        assertEquals(7928162,
             Day3().task2(input))
     }
 }
