@@ -20,8 +20,16 @@ internal class Day4Test {
         val input = File("src/test/resources/day4Task1.txt")
             .readLines()
 
-        assertEquals(4512,
+        assertEquals(10680,
             Day4().task1(input))
     }
 
+    @Test
+    internal fun task2Example() {
+        val input = File("src/test/resources/day4Example1.txt")
+            .readLines()
+
+        assertEquals(1924,
+            Day4().task2(input))
+    }
 }
