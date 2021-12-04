@@ -69,12 +69,9 @@ class Day4 {
         return -1
     }
 
-    private fun parseRandomNumbers(input: List<String>): List<Int> {
-        val numbers = input[0]
-            .split(",")
-            .map { it.toInt() }
-        return numbers
-    }
+    private fun parseRandomNumbers(input: List<String>) = input[0]
+        .split(",")
+        .map { it.toInt() }
 
     private fun parseBoards(input: List<String>): Triple<Int, Array<Array<BooleanArray>>, List<Array<IntArray>>> {
         val boardsCount = input.size / 6
