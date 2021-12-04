@@ -6,12 +6,12 @@ class Day4 {
             .split(",")
             .map { it.toInt() }
 
-        val boardsCount = input.size / 5
+        val boardsCount = input.size / 6
         val checked = Array(boardsCount) { Array(5) { BooleanArray(5) } }
 
         val boards = (0 until boardsCount).map { boardNumber ->
-            val boardStart = boardNumber * 5 + boardNumber + 2
-            (boardStart..boardStart + 4).map { boardLine ->
+            val boardStart = boardNumber * 6 + 1
+            (boardStart + 1..boardStart + 5).map { boardLine ->
                 input[boardLine]
                     .split(" ")
                     .filterNot { it.isEmpty() }
