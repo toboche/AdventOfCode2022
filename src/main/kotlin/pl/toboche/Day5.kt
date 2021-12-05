@@ -1,27 +1,29 @@
 package pl.toboche
 
 class Day5 {
-    fun task1(input: List<String>): Int {
-        val fold = input.asSequence()
-            .map {
-                mapLine(it)
-            }
-            .filter {
-                it.first.first == it.second.first
+    fun task1(input: List<String>) = task(input)
+
+    private fun task(input: List<String>, filterDiagonals: Boolean = true) = input.asSequence()
+        .map {
+            mapLine(it)
+        }
+        .filter {
+            when {
+                filterDiagonals -> it.first.first == it.second.first
                         || it.first.second == it.second.second
+                else -> true
             }
-            .map { allPoints(it) }
-            .flatten()
-            .fold(mutableMapOf<Pair<Int, Int>, Int>()) { acc, point ->
-                acc.compute(point) { key, value ->
-                    (value ?: 0) + 1
-                }
-                acc
+        }
+        .map { allPoints(it) }
+        .flatten()
+        .fold<Pair<Int, Int>, MutableMap<Pair<Int, Int>, Int>>(mutableMapOf()) { acc, point ->
+            acc.compute(point) { key, value ->
+                (value ?: 0) + 1
             }
-        return fold
-            .filter { pointEntry -> pointEntry.value >= 2 }
-            .count()
-    }
+            acc
+        }
+        .filter { pointEntry -> pointEntry.value >= 2 }
+        .count()
 
     private fun allPoints(it: Pair<Pair<Int, Int>, Pair<Int, Int>>): List<Pair<Int, Int>> {
         val (x1, y1) = it.first
@@ -30,10 +32,13 @@ class Day5 {
             (y1 toward y2).map { y ->
                 x1 to y
             }
-        } else {
+        } else if (y1 == y1) {
             (x1 toward x2).map { x ->
                 x to y1
             }
+        } else {
+            (x1 toward x1)
+                .zip(y1 toward y2)
         }
     }
 
@@ -42,17 +47,15 @@ class Day5 {
         return IntProgression.fromClosedRange(this, to, step)
     }
 
-    internal fun mapLine(it: String): Pair<Pair<Int, Int>, Pair<Int, Int>> {
-        return it.split(" -> ")
-            .map { points ->
-                points.split(",")
-                    .map { point -> point.toInt() }
-                    .let { point ->
-                        point[0] to point[1]
-                    }
-            }
-            .let { points ->
-                points[0] to points[1]
-            }
-    }
+    internal fun mapLine(it: String): Pair<Pair<Int, Int>, Pair<Int, Int>> = it.split(" -> ")
+        .map { points ->
+            points.split(",")
+                .map { point -> point.toInt() }
+                .let { point ->
+                    point[0] to point[1]
+                }
+        }
+        .let { points ->
+            points[0] to points[1]
+        }
 }
