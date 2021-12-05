@@ -19,4 +19,13 @@ internal class Day5Test {
         assertEquals((0 to 9) to (5 to 9),
             Day5().mapLine("0,9 -> 5,9"))
     }
+
+    @Test
+    internal fun task1() {
+        val input = File("src/test/resources/day5Task1.txt")
+            .readLines()
+
+        assertEquals(5169,
+            Day5().task1(input))
+    }
 }
