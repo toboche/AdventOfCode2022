@@ -3,6 +3,8 @@ package pl.toboche
 class Day5 {
     fun task1(input: List<String>) = task(input)
 
+    fun task2(input: List<String>) = task(input, false)
+
     private fun task(input: List<String>, filterDiagonals: Boolean = true) = input.asSequence()
         .map {
             mapLine(it)
@@ -25,19 +27,19 @@ class Day5 {
         .filter { pointEntry -> pointEntry.value >= 2 }
         .count()
 
-    private fun allPoints(it: Pair<Pair<Int, Int>, Pair<Int, Int>>): List<Pair<Int, Int>> {
-        val (x1, y1) = it.first
-        val (x2, y2) = it.second
+    private fun allPoints(edges: Pair<Pair<Int, Int>, Pair<Int, Int>>): List<Pair<Int, Int>> {
+        val (x1, y1) = edges.first
+        val (x2, y2) = edges.second
         return if (x1 == x2) {
             (y1 toward y2).map { y ->
                 x1 to y
             }
-        } else if (y1 == y1) {
+        } else if (y1 == y2) {
             (x1 toward x2).map { x ->
                 x to y1
             }
         } else {
-            (x1 toward x1)
+            (x1 toward x2)
                 .zip(y1 toward y2)
         }
     }
