@@ -1,18 +1,18 @@
 package pl.toboche
 
 class Day6 {
-    fun task1(input: String, iterations: Int = 80): Int {
+    fun task1(input: String, iterations: Int = 80): Long {
         val fishTimerToFishCount = input.split(",")
             .map { it.toInt() }
             .groupBy { it }
-            .map { it.key to it.value.count() }
+            .map { it.key to it.value.count().toLong() }
             .toMap()
 
         return (1..iterations).fold(fishTimerToFishCount) { fish, day ->
-            var newCount = 0
+            var newCount = 0L
             val newFish = fish.map { (timer, count) ->
                 val newTimer = when (timer) {
-                    in 1..8 -> {
+                    in 1L..8L -> {
                         timer - 1
                     }
                     0 -> {
