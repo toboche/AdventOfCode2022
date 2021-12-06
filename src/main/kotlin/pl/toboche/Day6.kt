@@ -12,13 +12,11 @@ class Day6 {
             var newCount = 0L
             val newFish = fish.map { (timer, count) ->
                 val newTimer = when (timer) {
-                    in 1L..8L -> {
-                        timer - 1
-                    }
                     0 -> {
                         newCount = count
                         6
                     }
+                    in 1L..8L -> timer - 1
                     else -> throw Exception()
                 }
                 if (timer == 7) {
@@ -28,7 +26,6 @@ class Day6 {
                 }
             }
                 .toMap()
-                .toMutableMap()
                 .toSortedMap()
             newFish[8] = newCount
             newFish
