@@ -1,0 +1,14 @@
+package pl.toboche
+
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
+
+internal class Day7Test {
+    @Test
+    internal fun task1Example1() {
+        val input = "16,1,2,0,4,2,7,1,2,14"
+
+        assertEquals(37,
+            Day7().task1(input))
+    }
+}
