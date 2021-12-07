@@ -30,4 +30,13 @@ internal class Day7Test {
             Day7().task2(input))
     }
 
+    @Test
+    internal fun task2() {
+        val input = File("src/test/resources/day7Task1.txt")
+            .readLines()[0]
+
+        assertEquals(336701,
+            Day7().task2(input))
+    }
+
 }

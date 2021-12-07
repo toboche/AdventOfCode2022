@@ -1,7 +1,6 @@
 package pl.toboche
 
 import java.lang.Math.abs
-import kotlin.math.roundToInt
 
 class Day7 {
     fun task1(input: String): Int {
@@ -13,7 +12,7 @@ class Day7 {
     fun task2(input: String): Int {
         val positions = mapPositions(input)
         val mean = positions.average()
-        return calculateFuelBurntLinearly(positions, mean.roundToInt())
+        return calculateFuelBurntLinearly(positions, mean.toInt())
     }
 
     private fun calculateFuelBurntLinearly(positions: List<Int>, toPosition: Int): Int {
