@@ -22,4 +22,12 @@ internal class Day7Test {
             Day7().task1(input))
     }
 
+    @Test
+    internal fun task2Example1() {
+        val input = "16,1,2,0,4,2,7,1,2,14"
+
+        assertEquals(168,
+            Day7().task2(input))
+    }
+
 }
