@@ -1,6 +1,7 @@
 package pl.toboche
 
 import java.lang.Math.abs
+import java.lang.Math.min
 
 class Day7 {
     fun task1(input: String): Int {
@@ -12,7 +13,10 @@ class Day7 {
     fun task2(input: String): Int {
         val positions = mapPositions(input)
         val mean = positions.average()
-        return calculateFuelBurntLinearly(positions, mean.toInt())
+        return min(
+            calculateFuelBurntLinearly(positions, mean.toInt()),
+            calculateFuelBurntLinearly(positions, mean.toInt() + 1)
+        )
     }
 
     private fun calculateFuelBurntLinearly(positions: List<Int>, toPosition: Int): Int {
