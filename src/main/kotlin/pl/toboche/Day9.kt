@@ -21,8 +21,7 @@ class Day9 {
                     x + dx to y + dy
                 }.filter { (nx, ny) ->
                     xBounds.contains(nx) && yBounds.contains(ny)
-                }
-                    .all { (nx, ny) -> array[ny][nx] > value }
+                }.all { (nx, ny) -> array[ny][nx] > value }
             }.sumOf { it.value + 1 }
         }.sum()
     }
