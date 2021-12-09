@@ -1,3 +1,5 @@
+package pl.toboche
+
 class Day8 {
     fun task1(input: List<String>): Int {
         return input.sumOf {
