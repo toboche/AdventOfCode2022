@@ -41,7 +41,7 @@ class Day10 {
         '<' to 4,
     )
 
-    fun task2(input: List<String>): Int {
+    fun task2(input: List<String>): Long {
         return input.map {
             val stack = mutableListOf<Char>()
             for (char in it) {
@@ -59,7 +59,7 @@ class Day10 {
         }.filter { (ok, _) ->
             ok
         }.map { (_, stack) ->
-            stack.foldRight(0) { char, acc ->
+            stack.foldRight(0L) { char, acc ->
                 acc * 5 + autocompletePoints[char]!!
             }
         }.sorted()
