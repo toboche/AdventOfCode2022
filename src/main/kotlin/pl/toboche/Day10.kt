@@ -2,14 +2,14 @@ package pl.toboche
 
 class Day10 {
 
-    val points = mapOf(
+    private val points = mapOf(
         ')' to 3,
         ']' to 57,
         '}' to 1197,
         '>' to 25137,
     )
 
-    val counterparts = mapOf(
+    private val counterparts = mapOf(
         ')' to '(',
         ']' to '[',
         '}' to '{',
@@ -34,11 +34,11 @@ class Day10 {
         }.sum()
     }
 
-    val autocompletePoints = mapOf(
-        ')' to 3,
-        ']' to 2,
-        '}' to 3,
-        '>' to 4,
+    private val autocompletePoints = mapOf(
+        '(' to 1,
+        '[' to 2,
+        '{' to 3,
+        '<' to 4,
     )
 
     fun task2(input: List<String>): Int {
@@ -56,10 +56,10 @@ class Day10 {
                 }
             }
             (true to stack)
-        }.filter { (ok, stack) ->
+        }.filter { (ok, _) ->
             ok
         }.map { (_, stack) ->
-            stack.fold(0) { acc, char ->
+            stack.foldRight(0) { char, acc ->
                 acc * 5 + autocompletePoints[char]!!
             }
         }.sorted()

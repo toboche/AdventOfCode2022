@@ -51,6 +51,17 @@ internal class Day10Test {
     }
 
     @Test
+    internal fun task2Example1() {
+        val input = (
+                "<{([{{}}[<[[[<>{}]]]>[]]"
+                )
+            .lines()
+
+        assertEquals(294,
+            Day10().task2(input))
+    }
+
+    @Test
     internal fun task2Example2() {
         val input = (
                 "[({(<(())[]>[[{[]{<()<>>\n" +
@@ -66,8 +77,7 @@ internal class Day10Test {
                 )
             .lines()
 
-        assertEquals(26397,
-            Day10().task1(input))
+        assertEquals(288957,
+            Day10().task2(input))
     }
-
 }
