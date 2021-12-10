@@ -34,4 +34,37 @@ class Day10 {
         }.sum()
     }
 
+    val autocompletePoints = mapOf(
+        ')' to 3,
+        ']' to 2,
+        '}' to 3,
+        '>' to 4,
+    )
+
+    fun task2(input: List<String>): Int {
+        return input.map {
+            val stack = mutableListOf<Char>()
+            for (char in it) {
+                when (char) {
+                    '(', '[', '<', '{' -> stack.add(char)
+                    else -> {
+                        val last = stack.removeLast()
+                        if (last != counterparts[char]!!) {
+                            return@map false to stack
+                        }
+                    }
+                }
+            }
+            (true to stack)
+        }.filter { (ok, stack) ->
+            ok
+        }.map { (_, stack) ->
+            stack.fold(0) { acc, char ->
+                acc * 5 + autocompletePoints[char]!!
+            }
+        }.sorted()
+            .let {
+                it[it.size / 2]
+            }
+    }
 }
