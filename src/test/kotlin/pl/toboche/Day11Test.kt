@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 
 internal class Day11Test {
 
-    val example = "5483143223\n" +
+    private val example = "5483143223\n" +
             "2745854711\n" +
             "5264556173\n" +
             "6141336146\n" +

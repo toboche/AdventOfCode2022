@@ -2,14 +2,14 @@ package pl.toboche
 
 class Day11 {
 
-    val adjacentVectors = (-1..1).flatMap { x -> (-1..1).map { x to it } } - (0 to 0)
+    private val adjacentVectors = (-1..1).flatMap { x -> (-1..1).map { x to it } } - (0 to 0)
 
     fun task1(input: List<String>, steps: Int): Int {
-        var oldState = input.map { it.map { it.digitToInt() }.toIntArray() }.toTypedArray()
+        var oldState = input.map { it.map { char -> char.digitToInt() }.toIntArray() }.toTypedArray()
 
         var flashes = 0
 
-        (1..steps).forEach {
+        repeat(steps) {
             val newState = Array(10) { IntArray(10) }
 
             oldState.indices.forEach { y ->
@@ -17,7 +17,7 @@ class Day11 {
                     newState[x][y] = oldState[x][y] + 1
                 }
             }
-            var newStateContainsNewFlashes = newState.find { it.find { it > 9 } != null } != null
+            var newStateContainsNewFlashes = newState.find { it.find { num -> num > 9 } != null } != null
             while (newStateContainsNewFlashes) {
                 newStateContainsNewFlashes = false
                 newState.indices.forEach { y ->
