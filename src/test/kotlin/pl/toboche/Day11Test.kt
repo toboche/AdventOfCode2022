@@ -46,4 +46,13 @@ internal class Day11Test {
         assertEquals(9,
             Day11().task1(input, steps = 1))
     }
+
+    @Test
+    internal fun task1ExampleFull() {
+        val input = example
+            .lines()
+
+        assertEquals(1656,
+            Day11().task1(input, steps = 100))
+    }
 }
