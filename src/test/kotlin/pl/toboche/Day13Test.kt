@@ -45,4 +45,22 @@ internal class Day13Test {
         Assertions.assertThat(Day13().task1(input, true))
             .isEqualTo(592)
     }
+
+    @Test
+    internal fun task2Example1() {
+        val input = example
+            .lines()
+
+        Assertions.assertThat(Day13().task1(input, false))
+            .isEqualTo(16)
+    }
+
+    @Test
+    internal fun task2() {
+        val input = File("src/test/resources/day13.txt")
+            .readLines()
+
+        Assertions.assertThat(Day13().task1(input, false))
+            .isEqualTo(94)
+    }
 }
