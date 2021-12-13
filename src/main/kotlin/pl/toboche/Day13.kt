@@ -1,20 +1,52 @@
 package pl.toboche
 
 class Day13 {
-    fun task1(input: List<String>): Int {
-        val yFold = input.first { it.startsWith("fold along y=") }.substringAfter("fold along y=").toInt()
-        val xFold = input.first { it.startsWith("fold along x=") }.substringAfter("fold along x=").toInt()
-        val fold = input.take(input.size - 3)
-            .fold(emptySet<Pair<Int, Int>>()) { set, it ->
-                val (x, y) = it.split(",")
+    fun task1(input: List<String>, singleFold: Boolean): Int {
+        val empty = input.indexOfFirst { it.isEmpty() }
+
+        val folds = input.filter { it.startsWith("fold along ") }.map {
+            val axisS = "[xy]".toRegex().find(it)!!.groups[0]!!.value
+            val valueS = it.substringAfter("=")
+            axisS.first() to valueS.toInt()
+        }
+        val map = input.take(empty)
+            .map { line ->
+                val (x, y) = line.split(",")
                     .map { it.toInt() }
-                set + if (y > yFold) {
-                    x to (y - yFold + 1)
-                } else {
-                    x to y
-                }
+                x to y
             }
-        return fold
+        var set = map.toSet()
+
+        if (singleFold) {
+            folds.take(1)
+        } else {
+            folds
+        }
+            .forEach { (foldAxis, foldValue) ->
+                val newSet =
+                    set.map { (x, y) ->
+                        if (foldAxis == 'y') {
+                            if (y > foldValue) {
+                                x to (y - foldValue + 1)
+                            } else {
+                                x to y
+                            }
+                        } else {
+                            if (x > foldValue) {
+                                5 - (9 - 5)
+                                foldValue - (x - foldValue) to y
+                            } else {
+                                x to y
+                            }
+                        }
+                    }.toSet()
+                set = newSet
+            }
+//            .fold(setOf<Pair<Int, Int>>()) { set, point ->
+//                set + folds.fold(point) { (x, y), (foldAxis, foldValue) ->
+//                }
+//            }
+        return set
             .size
     }
 
