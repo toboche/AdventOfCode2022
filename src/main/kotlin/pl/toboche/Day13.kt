@@ -27,13 +27,12 @@ class Day13 {
                     set.map { (x, y) ->
                         if (foldAxis == 'y') {
                             if (y > foldValue) {
-                                x to (y - foldValue + 1)
+                                x to foldValue - (y - foldValue)
                             } else {
                                 x to y
                             }
                         } else {
                             if (x > foldValue) {
-                                5 - (9 - 5)
                                 foldValue - (x - foldValue) to y
                             } else {
                                 x to y
@@ -42,12 +41,12 @@ class Day13 {
                     }.toSet()
                 set = newSet
             }
-//            .fold(setOf<Pair<Int, Int>>()) { set, point ->
-//                set + folds.fold(point) { (x, y), (foldAxis, foldValue) ->
-//                }
-//            }
         return set
             .size
     }
+
+//    (set.groupBy { it.second }.map { ( key, value)-> key to value.map { it.first }.sorted() } as MutableList).sortedBy { it.first }.map {(_, list)->
+//        (0..38).map { if(list.contains(it))'#' else '_' }.joinToString("")
+//    }
 
 }
