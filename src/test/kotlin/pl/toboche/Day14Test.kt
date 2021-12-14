@@ -28,8 +28,8 @@ internal class Day14Test {
         val input = example
             .lines()
 
-        Assertions.assertThat(Day14().task1(input))
-            .isEqualTo(3073)
+        Assertions.assertThat(Day14().task1String(input))
+            .isEqualTo(1588)
     }
 
     @Test
@@ -37,7 +37,7 @@ internal class Day14Test {
         val input = example
             .lines()
 
-        Assertions.assertThat(Day14().task1(input, steps = 1))
-            .isEqualTo(7)
+        Assertions.assertThat(Day14().task1String(input, steps = 1))
+            .isEqualTo(1)
     }
 }
