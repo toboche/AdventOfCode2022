@@ -15,7 +15,7 @@ class Day14 {
                 .joinToString("")
 
         }.fold(IntArray(26)) { acc, char ->
-            acc[char.toInt() - 'A'.toInt()] += 1
+            acc[char.code - 'A'.code] += 1
             acc
         }.sorted().let {
             it.last() - it.first { it > 0 }
