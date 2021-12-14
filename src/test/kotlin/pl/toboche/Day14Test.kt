@@ -48,6 +48,15 @@ internal class Day14Test {
             .readLines()
 
         Assertions.assertThat(Day14().task1String(input, steps = 10))
-            .isEqualTo(1)
+            .isEqualTo(2112)
+    }
+
+    @Test
+    internal fun task2() {
+        val input = File("src/test/resources/day14.txt")
+            .readLines()
+
+        Assertions.assertThat(Day14().task1String(input, steps = 40))
+            .isEqualTo(3243771149914)
     }
 }
