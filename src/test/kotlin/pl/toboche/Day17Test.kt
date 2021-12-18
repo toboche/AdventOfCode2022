@@ -17,6 +17,6 @@ internal class Day17Test {
         val input = "target area: x=81..129, y=-150..-108"
 
         Assertions.assertThat(
-            Day17().task1(input)).isEqualTo(11175 ŻĻ)
+            Day17().task1(input)).isEqualTo(11175)
     }
 }
