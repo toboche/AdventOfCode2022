@@ -9,7 +9,7 @@ internal class Day16Test {
     internal fun task1Example1() {
         val input = "D2FE28"
 
-        Assertions.assertThat(Day16().task1Inner(input))
+        Assertions.assertThat(Day16().fullyParse(input))
             .isEqualTo(Packet(6, 4, 2021, null, 21))
 
         Assertions.assertThat(Day16().task1(input))
@@ -20,7 +20,7 @@ internal class Day16Test {
     internal fun task1Example2() {
         val input = "38006F45291200"
 
-        Assertions.assertThat(Day16().task1Inner(input))
+        Assertions.assertThat(Day16().fullyParse(input))
             .isEqualTo(Packet(1, 6, null, listOf(
                 Packet(6, 4, 10, null, 33),
                 Packet(2, 4, 20, null, 49),
@@ -33,7 +33,7 @@ internal class Day16Test {
     internal fun task1Example3() {
         val input = "EE00D40C823060"
 
-        Assertions.assertThat(Day16().task1Inner(input))
+        Assertions.assertThat(Day16().fullyParse(input))
             .isEqualTo(Packet(7, 3, null, listOf(
                 Packet(2, 4, 1, null, 29),
                 Packet(4, 4, 2, null, 40),

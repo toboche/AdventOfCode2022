@@ -20,6 +20,8 @@ class Day16 {
         'F' to "1111",
     )
 
+    private var bits = ""
+
     fun task1(input: String): Int {
         bits = input.map { hexMappings[it]!! }.joinToString("")
         val root = parseSinglePacket(0)
@@ -31,13 +33,10 @@ class Day16 {
             ?: 0)
     }
 
-    fun task1Inner(input: String): Packet {
+    fun fullyParse(input: String): Packet {
         bits = input.map { hexMappings[it]!! }.joinToString("")
         return parseSinglePacket(0)
     }
-
-
-    private var bits = ""
 
     data class BasicInfo(
         val version: Int,
@@ -91,26 +90,6 @@ class Day16 {
         } else {
             throw Exception()
         }
-
-//        return if (type == 4) {
-//            parseValue(packetContent, version, type)
-//        } else if (mode == '0') {
-//            val totalLengthOfBitsInSubpackets = packetContent.subSequence(1, 16).toString().toInt(2)
-//            listOf(Packet(version,
-//                type,
-//                null,
-//                parse(packetContent.drop(16))
-//            ))
-//        } else if (mode == '1') {
-//            val numberOfSubpackets = packetContent.subSequence(1, 12).toString().toInt(2)
-//            listOf(Packet(version,
-//                type,
-//                null,
-//                parse(packetContent.drop(16))
-//            ))
-//        } else {
-//            throw Exception()
-//        }
     }
 
     private fun parseSupacketsByCount(
@@ -149,12 +128,6 @@ class Day16 {
         val value = windowedValue.take(lastByteIndex + 1).joinToString("") { it.drop(1) }
             .toLong(2)
         val endIndex = packetContentStartIndex + (lastByteIndex + 1) * 5
-//        val endIndex =
-//            if ((packetContentStartIndex + (lastByteIndex + 1) * 5) % 4 == 0) {
-//                packetContentStartIndex + lastByteIndex
-//            } else {
-//                (4 - ((packetContentStartIndex + (lastByteIndex + 1) * 5) % 4)) + packetContentStartIndex + (lastByteIndex + 1) * 5
-//            }
         return Packet(
             version,
             type,
