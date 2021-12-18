@@ -80,8 +80,22 @@ internal class Day16Test {
         val input = File("src/test/resources/day16.txt").readLines().first()
 
         Assertions.assertThat(
-            Day16().task1(input)).isEqualTo(1)
+            Day16().task1(input)).isEqualTo(953)
+    }
 
+    @Test
+    internal fun task2Sum() {
+        val input = "C200B40A82"
 
+        Assertions.assertThat(
+            Day16().task2(input)).isEqualTo(3)
+    }
+
+    @Test
+    internal fun task2Product() {
+        val input = "04005AC33890"
+
+        Assertions.assertThat(
+            Day16().task2(input)).isEqualTo(54)
     }
 }

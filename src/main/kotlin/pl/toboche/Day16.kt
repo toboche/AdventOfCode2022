@@ -28,6 +28,21 @@ class Day16 {
         return sumRec(root)
     }
 
+    fun task2(input: String): Long {
+        bits = input.map { hexMappings[it]!! }.joinToString("")
+        val root = parseSinglePacket(0)
+        return execute(root)
+    }
+
+    private fun execute(packet: Packet): Long {
+        return when (packet.type) {
+            4 -> packet.value!!
+            0 -> packet.packets!!.sumOf { execute(it) }
+            1 -> packet.packets!!.fold(1) { acc, packet -> acc * execute(packet) }
+            else -> throw Exception()
+        }
+    }
+
     private fun sumRec(root: Packet): Int {
         return root.version + ((root.packets?.map { sumRec(it) })?.sum()
             ?: 0)
