@@ -16,13 +16,11 @@ class Day17 {
             .map { it.toInt() }
         val yrange = ymin..ymax
 
-        val xvel = 6
-        val yvel = 9
 
         var highest = Int.MIN_VALUE
 
-        for (xval in 1..xmax) {
-            for (yval in ymin..ymin.absoluteValue) {
+        for (xvel in 1..xmax) {
+            for (yvel in ymin..ymin.absoluteValue) {
                 val current = simulate(xvel, yvel, xrange, yrange)
                 if (current != Int.MIN_VALUE) {
                     highest = max(highest, current)
