@@ -130,4 +130,12 @@ internal class Day16Test {
         Assertions.assertThat(
             Day16().task2(input)).isEqualTo(0)
     }
+
+    @Test
+    internal fun task2Equals() {
+        val input = "9C0141080250320F1802104A08"
+
+        Assertions.assertThat(
+            Day16().task2(input)).isEqualTo(1)
+    }
 }

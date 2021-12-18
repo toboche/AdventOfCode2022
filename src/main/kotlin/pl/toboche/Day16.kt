@@ -43,6 +43,7 @@ class Day16 {
             3 -> packet.packets!!.maxOf { execute(it) }
             5 -> if (execute(packet.packets!![0]) > execute(packet.packets[1])) 1 else 0
             6 -> if (execute(packet.packets!![0]) < execute(packet.packets[1])) 1 else 0
+            7 -> if (execute(packet.packets!![0]) == execute(packet.packets[1])) 1 else 0
             else -> throw Exception()
         }
     }
