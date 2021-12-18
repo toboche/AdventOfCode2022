@@ -98,4 +98,20 @@ internal class Day16Test {
         Assertions.assertThat(
             Day16().task2(input)).isEqualTo(54)
     }
+
+    @Test
+    internal fun task2Min() {
+        val input = "880086C3E88112"
+
+        Assertions.assertThat(
+            Day16().task2(input)).isEqualTo(7)
+    }
+
+    @Test
+    internal fun task2Max() {
+        val input = "CE00C43D881120"
+
+        Assertions.assertThat(
+            Day16().task2(input)).isEqualTo(9)
+    }
 }

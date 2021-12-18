@@ -39,6 +39,8 @@ class Day16 {
             4 -> packet.value!!
             0 -> packet.packets!!.sumOf { execute(it) }
             1 -> packet.packets!!.fold(1) { acc, packet -> acc * execute(packet) }
+            2 -> packet.packets!!.minOf { execute(it) }
+            3 -> packet.packets!!.maxOf { execute(it) }
             else -> throw Exception()
         }
     }
