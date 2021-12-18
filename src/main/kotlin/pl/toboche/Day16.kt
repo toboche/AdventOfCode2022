@@ -41,6 +41,8 @@ class Day16 {
             1 -> packet.packets!!.fold(1) { acc, packet -> acc * execute(packet) }
             2 -> packet.packets!!.minOf { execute(it) }
             3 -> packet.packets!!.maxOf { execute(it) }
+            5 -> if (execute(packet.packets!![0]) > execute(packet.packets[1])) 1 else 0
+            6 -> if (execute(packet.packets!![0]) < execute(packet.packets[1])) 1 else 0
             else -> throw Exception()
         }
     }

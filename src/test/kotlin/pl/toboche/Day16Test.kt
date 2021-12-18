@@ -114,4 +114,20 @@ internal class Day16Test {
         Assertions.assertThat(
             Day16().task2(input)).isEqualTo(9)
     }
+
+    @Test
+    internal fun task2Greater() {
+        val input = "D8005AC2A8F0"
+
+        Assertions.assertThat(
+            Day16().task2(input)).isEqualTo(1)
+    }
+
+    @Test
+    internal fun task2Less() {
+        val input = "F600BC2D8F"
+
+        Assertions.assertThat(
+            Day16().task2(input)).isEqualTo(0)
+    }
 }
