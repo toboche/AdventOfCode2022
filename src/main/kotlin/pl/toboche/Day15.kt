@@ -1,8 +1,6 @@
 package pl.toboche
 
 
-typealias Point = Pair<Int, Int>
-
 class Day15 {
 
     fun task1(input: List<String>): Int {
