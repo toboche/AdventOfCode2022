@@ -29,7 +29,7 @@ internal class Day19Test {
             .readLines()
 
         Assertions.assertThat(
-            Day19().task2(input)).isEqualTo(430)
+            Day19().task2(input)).isEqualTo(11860)
     }
 
     private val twoOverlapping = ("--- scanner 0 ---\n" +
