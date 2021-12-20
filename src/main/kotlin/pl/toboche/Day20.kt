@@ -3,29 +3,22 @@ package pl.toboche
 class Day20 {
     private val adjacentVectors = (-1..1).flatMap { x -> (-1..1).map { x to it } }
 
-    fun task1(input: List<String>): Int {
-        val iterations = 2
+    fun task1(input: List<String>, iterations: Int): Int {
         val code = input[0]
-        val xLen = input[2].length + (2 * iterations)
-        val yLen = input.size - 2 + (2 * iterations)
 
-        val rest =
-            (0 until iterations).map { (0..xLen).map { '.' }.joinToString("") } +
-                    input.drop(2)
-                        .map { "..$it.." } +
-                    (0 until iterations).map { (0..xLen).map { '.' }.joinToString("") }
+        val rest = input.drop(2)
         var new: List<String> = rest
-        repeat(iterations) { iter ->
-            val old = new.map { it.map { it } }
-            new = new.mapIndexed { y, line ->
-                line.mapIndexed { x, _ ->
+        var default = '.'
+        repeat(iterations) {
+            new = (-1..new.size).map { y ->
+                (-1..new.first().length).map { x ->
                     val joinToString = adjacentVectors
                         .map { (dy, dx) -> x + dx to y + dy }
                         .map { (x, y) ->
-                            if (x < 0 || y < 0 || y >= yLen || x >= xLen) {
-                                '.'
+                            if (!(0 until new.first().length).contains(x) || !(new.indices).contains(y)) {
+                                default
                             } else {
-                                old[y][x]
+                                new[y][x]
                             }
                         }
                         .map {
@@ -40,6 +33,7 @@ class Day20 {
                     code[int]
                 }.joinToString("")
             }
+            default = if (default == '.') code.first() else code.last()
         }
         return new.sumOf { it.count { it == '#' } }
     }
