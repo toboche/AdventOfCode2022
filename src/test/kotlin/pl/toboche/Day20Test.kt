@@ -22,7 +22,7 @@ internal class Day20Test {
         Assertions.assertThat(
             Day20().task1(input, 2)).isEqualTo(5479)
     }
-    Ļ
+
     @Test
     internal fun task2Example() {
         val input = File("src/test/resources/day20Example.txt")
@@ -37,7 +37,7 @@ internal class Day20Test {
     internal fun task2() {
         val input = File("src/test/resources/day20.txt")
             .readLines()
-        ŻĻ
+
         Assertions.assertThat(
             Day20().task1(input, 50)).isEqualTo(19012)
     }
