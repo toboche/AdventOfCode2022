@@ -73,6 +73,6 @@ internal class Day17Test {
 
         Assertions.assertThat(
             Day17().solve(input).count()
-        ).isEqualTo(112)
+        ).isEqualTo(3540)
     }
 }

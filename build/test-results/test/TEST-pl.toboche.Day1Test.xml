@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="pl.toboche.Day1Test" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-12-01T16:33:54" hostname="L01014963.local" time="0.013">
-  <properties/>
-  <testcase name="task1Example$AdventOfCode2021()" classname="pl.toboche.Day1Test" time="0.013"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
