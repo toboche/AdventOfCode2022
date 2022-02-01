@@ -24,7 +24,7 @@ class Day21 {
         return counter * min(playerOne.points, playerTwo.points)
     }
 
-    //can be optimised to get occurrences, but won't change much here
+    //can be optimised to get occurrences per each number, but won't change much here
     private val threeDiceThrowCombinations =
         (1..3)
             .flatMap { x1 -> (1..3).map { x1 + it } }
@@ -46,35 +46,43 @@ class Day21 {
 
             //for each possible dice result 1,2,3
             //map current universe to the next universe state
-            universesCount = threeDiceThrowCombinations.map { diceRollsResultSum ->
-                universesCount.map { currentUniverse ->
-                    val oldState = currentUniverse.key
-                    calculateNewState(
-                        playerOneTurn,
-                        oldState,
-                        diceRollsResultSum,
-                        currentUniverse
-                    )
-                }.toMap()
-            }.fold(
-                mutableMapOf()
-            ) { acc, map ->
-                map.entries.forEach { entry ->
-                    acc.compute(entry.key) { key, value ->
-                        (value ?: 0) + entry.value
-                    }
-                }
-                acc
-            }
+            universesCount = calculateNextDiceRollUniversesCount(universesCount, playerOneTurn)
             playerOneWins += universesCount.filter { it.key.playerOnePoints >= winLimit }.values.sum()
             playerTwoWins += universesCount.filter { it.key.playerTwoPoints >= winLimit }.values.sum()
             universesCount =
-                universesCount.filterNot { it.key.playerOnePoints >= winLimit || it.key.playerTwoPoints >= winLimit }
+                universesCount.filterNot {
+                    it.key.playerOnePoints >= winLimit || it.key.playerTwoPoints >= winLimit
+                }
                     .toMutableMap()
             playerOneTurn = !playerOneTurn
         }
         return max(playerOneWins, playerTwoWins)
     }
+
+    private fun calculateNextDiceRollUniversesCount(
+        universesCount: MutableMap<UniverseState, Long>,
+        playerOneTurn: Boolean
+    ): MutableMap<UniverseState, Long> =
+        threeDiceThrowCombinations.map { diceRollsResultSum ->
+            universesCount.map { currentUniverse ->
+                val oldState = currentUniverse.key
+                calculateNewState(
+                    playerOneTurn,
+                    oldState,
+                    diceRollsResultSum,
+                    currentUniverse
+                )
+            }.toMap()
+        }.fold(
+            mutableMapOf()
+        ) { acc, map ->
+            map.entries.forEach { entry ->
+                acc.compute(entry.key) { key, value ->
+                    (value ?: 0) + entry.value
+                }
+            }
+            acc
+        }
 
     private fun calculateNewState(
         playerOneTurn: Boolean,
