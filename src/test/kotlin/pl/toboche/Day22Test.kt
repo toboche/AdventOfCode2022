@@ -121,7 +121,7 @@ class Day22Test {
 
     @Test
     @Timeout(1, unit = TimeUnit.DAYS)
-    fun task2() {
+    fun task2Example2() {
         assertEquals(
             2758514936282235,
             Day22().task2(
@@ -131,5 +131,18 @@ class Day22Test {
             )
         )
     }
+
+    @Test
+    fun task2() {
+        assertEquals(
+            601104,
+            Day22().task2(
+                File("src/test/resources/day22.txt")
+                    .readText()
+
+            )
+        )
+    }
+
 
 }
