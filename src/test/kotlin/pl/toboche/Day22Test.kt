@@ -2,7 +2,9 @@ package pl.toboche
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Timeout
 import java.io.File
+import java.util.concurrent.TimeUnit
 
 class Day22Test {
     @Test
@@ -116,4 +118,18 @@ class Day22Test {
             )
         )
     }
+
+    @Test
+    @Timeout(1, unit = TimeUnit.DAYS)
+    fun task2() {
+        assertEquals(
+            2758514936282235,
+            Day22().task2(
+                File("src/test/resources/day22exercise2example.txt")
+                    .readText()
+
+            )
+        )
+    }
+
 }

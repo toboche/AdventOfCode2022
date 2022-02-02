@@ -37,17 +37,20 @@ class Day22 {
         }
         return x1..x2
     }
+    private fun rangeNotCapped(s: String): IntRange {
+        val (x1, x2) = s.drop(2).split("..").map { it.toInt() }
+        return x1..x2
+    }
 
     fun task2(input: String): Long {
-        val cubes = mutableSetOf<Cube>()
         return input.lines().map { line ->
             val splitBySpace = line.split(" ")
             val splitByComma = splitBySpace[1].split(",")
             Cuboid(
                 splitBySpace[0] == "on",
-                range(splitByComma[1]),
-                range(splitByComma[1]),
-                range(splitByComma[1])
+                rangeNotCapped(splitByComma[0]),
+                rangeNotCapped(splitByComma[1]),
+                rangeNotCapped(splitByComma[2])
             )
         }.fold(listOf<Cuboid>()) { currentCubes, cube ->
             (currentCubes + currentCubes.mapNotNull { it.intersection(cube) }).let {
@@ -58,9 +61,12 @@ class Day22 {
                 }
             }
         }.sumOf {
-            (it.xRange.size().toLong() * it.yRange.size().toLong() * it.zRange.size().toLong()) * if (it.on) 1 else -1
+            volume(it)
         }
     }
+
+    private fun volume(it: Cuboid) =
+        (it.xRange.size().toLong() * it.yRange.size().toLong() * it.zRange.size().toLong()) * if (it.on) 1 else -1
 
     data class Cube(
         val xRange: IntRange,
