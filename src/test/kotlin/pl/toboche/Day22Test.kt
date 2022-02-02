@@ -104,4 +104,16 @@ class Day22Test {
         )
     }
 
+    @Test
+    fun task2Example1() {
+        assertEquals(
+            39,
+            Day22().task2(
+                "on x=10..12,y=10..12,z=10..12\n" +
+                        "on x=11..13,y=11..13,z=11..13\n" +
+                        "off x=9..11,y=9..11,z=9..11\n" +
+                        "on x=10..10,y=10..10,z=10..10"
+            )
+        )
+    }
 }

@@ -1,8 +1,5 @@
 package pl.toboche
 
-import java.lang.Integer.max
-import java.lang.Integer.min
-
 class Day22 {
     fun task1(input: String): Int {
         val cubes = mutableSetOf<Triple<Int, Int, Int>>()
@@ -41,11 +38,63 @@ class Day22 {
         return x1..x2
     }
 
-    data class Cuboid(
-        val on: Boolean,
+    fun task2(input: String): Long {
+        val cubes = mutableSetOf<Cube>()
+        return input.lines().map { line ->
+            val splitBySpace = line.split(" ")
+            val splitByComma = splitBySpace[1].split(",")
+            Cuboid(
+                splitBySpace[0] == "on",
+                range(splitByComma[1]),
+                range(splitByComma[1]),
+                range(splitByComma[1])
+            )
+        }.fold(listOf<Cuboid>()) { currentCubes, cube ->
+            (currentCubes + currentCubes.mapNotNull { it.intersection(cube) }).let {
+                if (cube.on) {
+                    it + cube
+                } else {
+                    it
+                }
+            }
+        }.sumOf {
+            (it.xRange.size().toLong() * it.yRange.size().toLong() * it.zRange.size().toLong()) * if (it.on) 1 else -1
+        }
+    }
+
+    data class Cube(
         val xRange: IntRange,
         val yRange: IntRange,
         val zRange: IntRange,
     )
 
+
+    data class Cuboid(
+        val on: Boolean,
+        val xRange: IntRange,
+        val yRange: IntRange,
+        val zRange: IntRange,
+    ) {
+        fun intersection(cube: Cuboid): Cuboid? {
+            return if (xRange.intersectsRange(cube.xRange) &&
+                yRange.intersectsRange(cube.yRange) &&
+                zRange.intersectsRange(cube.zRange)
+            ) {
+                Cuboid(
+                    !on,
+                    maxOf(xRange.first, cube.xRange.first)..minOf(xRange.last, cube.xRange.last),
+                    maxOf(yRange.first, cube.yRange.first)..minOf(yRange.last, cube.yRange.last),
+                    maxOf(zRange.first, cube.zRange.first)..minOf(zRange.last, cube.zRange.last),
+                )
+            } else {
+                null
+            }
+        }
+    }
+
 }
+
+private fun IntRange.size() = last - first + 1
+
+
+private fun IntRange.intersectsRange(range: IntRange) = first <= range.last && last >= range.first
