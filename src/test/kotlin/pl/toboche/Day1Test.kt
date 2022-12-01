@@ -7,19 +7,25 @@ import java.io.File
 internal class Day1Test {
     @Test
     internal fun task1Example() {
-        val input = ("199\n" +
-                "200\n" +
-                "208\n" +
-                "210\n" +
-                "200\n" +
-                "207\n" +
-                "240\n" +
-                "269\n" +
-                "260\n" +
-                "263")
+        val input = ("1000\n" +
+                "2000\n" +
+                "3000\n" +
+                "\n" +
+                "4000\n" +
+                "\n" +
+                "5000\n" +
+                "6000\n" +
+                "\n" +
+                "7000\n" +
+                "8000\n" +
+                "9000\n" +
+                "\n" +
+                "10000")
             .lines()
-        assertEquals(7,
-            Day1().task1(input))
+        assertEquals(
+            24000,
+            Day1().task1(input)
+        )
     }
 
     @Test
@@ -28,34 +34,9 @@ internal class Day1Test {
             .readText()
             .lines()
 
-        assertEquals(1713,
-            Day1().task1(input))
-    }
-
-    @Test
-    internal fun task2Example() {
-        val input = ("199\n" +
-                "200\n" +
-                "208\n" +
-                "210\n" +
-                "200\n" +
-                "207\n" +
-                "240\n" +
-                "269\n" +
-                "260\n" +
-                "263")
-            .lines()
-        assertEquals(5,
-            Day1().task2(input))
-    }
-
-    @Test
-    internal fun task2() {
-        val input = File("src/test/resources/day1Task1.txt")
-            .readText()
-            .lines()
-
-        assertEquals(1734,
-            Day1().task2(input))
+        assertEquals(
+            69206,
+            Day1().task1(input)
+        )
     }
 }
