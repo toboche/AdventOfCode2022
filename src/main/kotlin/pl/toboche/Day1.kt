@@ -6,7 +6,7 @@ class Day1 {
         var max = 0
         input.forEach {
             if (it.isEmpty()) {
-                max = Math.max(max, sum)
+                max = max.coerceAtLeast(sum)
                 sum = 0
             } else {
                 sum += it.toInt()
@@ -16,10 +16,17 @@ class Day1 {
     }
 
     fun task2(input: List<String>): Int {
-        return input.map { it.toInt() }
-            .windowed(3)
-            .map { it.sum() }
-            .windowed(2)
-            .count { (left, right) -> right > left }
+        val sums = mutableListOf<Int>()
+        var sum = 0
+        input.forEach {
+            if (it.isEmpty()) {
+                sums.add(sum)
+                sum = 0
+            } else {
+                sum += it.toInt()
+            }
+        }
+        sums.add(sum)
+        return sums.sortedDescending().take(3).sum()
     }
 }
