@@ -31,4 +31,20 @@ internal class Day4Test {
             Day4().task1(input)
         )
     }
+
+    @Test
+    internal fun task2Example() {
+        val input = ("2-4,6-8\n" +
+                "2-3,4-5\n" +
+                "5-7,7-9\n" +
+                "2-8,3-7\n" +
+                "6-6,4-6\n" +
+                "2-6,4-8")
+            .lines()
+        assertEquals(
+            4,
+            Day4().task2(input)
+        )
+    }
+
 }
