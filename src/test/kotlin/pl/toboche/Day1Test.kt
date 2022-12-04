@@ -71,7 +71,7 @@ internal class Day1Test {
             .lines()
 
         assertEquals(
-            69206,
+            197400,
             Day1().task2(input)
         )
     }
