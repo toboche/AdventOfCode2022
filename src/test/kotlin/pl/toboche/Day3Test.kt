@@ -31,4 +31,20 @@ internal class Day3Test {
             Day3().task1(input)
         )
     }
+
+    @Test
+    internal fun task2Example() {
+        val input = ("vJrwpWtwJgWrhcsFMMfFFhFp\n" +
+                "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL\n" +
+                "PmmdzqPrVvPwwTWBwg\n" +
+                "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn\n" +
+                "ttgJtRGJQctTZtZT\n" +
+                "CrZsJsPPZsGzwwsLwLmpwMDw")
+            .lines()
+        assertEquals(
+            70,
+            Day3().task2(input)
+        )
+    }
+
 }

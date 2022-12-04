@@ -9,15 +9,22 @@ class Day3 {
                 inLeft.add(char)
             }
             val duplicate = line.drop(length / 2).first { inLeft.contains(it) }
-            if (duplicate.isUpperCase()) {
-                duplicate.code - 'A'.code + 27
-            } else {
-            duplicate.code - 'a'.code + 1
-            }
+            priorityOf(duplicate)
         }
     }
 
+    private fun priorityOf(duplicate: Char) = if (duplicate.isUpperCase()) {
+        duplicate.code - 'A'.code + 27
+    } else {
+        duplicate.code - 'a'.code + 1
+    }
+
     fun task2(input: List<String>): Int {
-        return -1
+        return input.windowed(3, 3, false).sumOf { threeElves ->
+            priorityOf(threeElves.map { it.toSet() }
+                .reduce { acc, set -> acc.intersect(set) }
+                .first()
+            )
+        }
     }
 }
