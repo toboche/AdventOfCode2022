@@ -2,7 +2,7 @@ package pl.toboche
 
 class Day5 {
 
-    fun task1(input: List<String>): String {
+    fun task1(input: List<String>, reversed: Boolean = false): String {
         val (numbersRowIndex, numbersRowContent) = input.withIndex().first { it.value.startsWith(" 1") }
         val numbers = numbersRowContent.split(" ").filter { it.isNotBlank() && it.isNotEmpty() }
         val stacksCount = numbers.count()
@@ -25,9 +25,18 @@ class Day5 {
             val count = line.substringAfter("move ").takeWhile { !it.isWhitespace() }.toInt()
             val fromIndex = line.substringAfter("from ").takeWhile { !it.isWhitespace() }.toInt()
             val toIndex = line.substringAfter("to ").toInt()
-            repeat(count) {
-                stacks[toIndex]!!.add(stacks[fromIndex]!!.removeLast())
-            }
+            val removed =
+                (1..count).map {
+                    stacks[fromIndex]!!.removeLast()
+                }.let {
+                    if (reversed) {
+                        it.asReversed()
+                    } else {
+                        it
+                    }
+                }
+            stacks[toIndex]!!.addAll(removed)
+
         }
         return stacks.values.map { it.last() }.joinToString("")
     }
