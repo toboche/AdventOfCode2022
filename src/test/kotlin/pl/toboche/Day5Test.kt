@@ -5,23 +5,23 @@ import org.junit.jupiter.api.Test
 import java.io.File
 
 internal class Day5Test {
-    @Test
-    internal fun task1Example() {
-        val input = ("    [D]    \n" +
-                "[N] [C]    \n" +
-                "[Z] [M] [P]\n" +
-                " 1   2   3 \n" +
-                "\n" +
-                "move 1 from 2 to 1\n" +
-                "move 3 from 1 to 3\n" +
-                "move 2 from 2 to 1\n" +
-                "move 1 from 1 to 2")
-            .lines()
-        assertEquals(
-            "CMZ",
-            Day5().task1(input)
-        )
-    }
+//    @Test
+//    internal fun task1Example() {
+//        val input = ("    [D]    \n" +
+//                "[N] [C]    \n" +
+//                "[Z] [M] [P]\n" +
+//                " 1   2   3 \n" +
+//                "\n" +
+//                "move 1 from 2 to 1\n" +
+//                "move 3 from 1 to 3\n" +
+//                "move 2 from 2 to 1\n" +
+//                "move 1 from 1 to 2")
+//            .lines()
+//        assertEquals(
+//            "CMZ",
+//            Day5().task1(input)
+//        )
+//    }
 
     @Test
     internal fun task1() {
@@ -30,7 +30,7 @@ internal class Day5Test {
             .lines()
 
         assertEquals(
-            507,
+            "507",
             Day5().task1(input)
         )
     }
