@@ -60,7 +60,7 @@ internal class Day5Test {
             .lines()
 
         assertEquals(
-            "VQZNJMWTR",
+            "NLCDCLVMQ",
             Day5().task1(input, true)
         )
     }
