@@ -10,7 +10,7 @@ internal class Day6Test {
         val input = ("mjqjpqmgbljsphdztnvjfqwrcgsmlb")
         assertEquals(
             7,
-            Day6().task1(input)
+            Day6().task1(input, 4)
         )
     }
 
@@ -20,8 +20,18 @@ internal class Day6Test {
             .readText()
 
         assertEquals(
-            123,
-            Day6().task1(input)
+            1142,
+            Day6().task1(input, 4)
         )
     }
+
+    @Test
+    internal fun task2Example() {
+        val input = ("mjqjpqmgbljsphdztnvjfqwrcgsmlb")
+        assertEquals(
+            19,
+            Day6().task1(input, 14)
+        )
+    }
+
 }
