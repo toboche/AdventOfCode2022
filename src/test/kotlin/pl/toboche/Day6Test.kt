@@ -40,7 +40,7 @@ internal class Day6Test {
             .readText()
 
         assertEquals(
-            1142,
+            2803,
             Day6().task1(input, 14)
         )
     }
