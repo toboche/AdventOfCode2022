@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.io.File
 
-internal class Day7Test {
+class Day7Test {
     @Test
-    internal fun task1Example() {
+    fun task1Example() {
         val input = ("\$ cd /\n" +
                 "\$ ls\n" +
                 "dir a\n" +
@@ -38,7 +38,7 @@ internal class Day7Test {
     }
 
     @Test
-    internal fun task1() {
+    fun task1() {
         val input = File("src/test/resources/Day7Task1.txt")
             .readText()
             .lines()
@@ -81,4 +81,16 @@ internal class Day7Test {
         )
     }
 
+    @Test
+    fun task2() {
+        val input = File("src/test/resources/Day7Task1.txt")
+            .readText()
+            .lines()
+
+        //16624734 - zla
+        assertEquals(
+            1086293,
+            Day7().task1(input, true)
+        )
+    }
 }

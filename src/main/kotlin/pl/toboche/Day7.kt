@@ -7,6 +7,7 @@ class Day7 {
         val currentPath = mutableListOf<String>()
         val currentPathSize = mutableListOf<Int>()
         var sum = 0
+        var qs = 0
         input.forEach { line ->
             if (line.startsWith("\$ cd") and !line.startsWith("\$ cd ..")) {
                 val name = line.substringAfter("\$ cd ")
@@ -15,9 +16,9 @@ class Day7 {
             } else if (line.startsWith("\$ ls")) {
 
             } else if (line == "\$ cd ..") {
-                val currentDirName = currentPath.removeLast()
                 val currentSize = currentPathSize.removeLast()
-                tree[currentDirName] = currentSize
+                tree[currentPath.joinToString("")] = currentSize
+                currentPath.removeLast()
                 if (currentSize <= 100000)
                     sum += currentSize
                 currentPathSize.add(currentPathSize.removeLast() + currentSize)
@@ -26,12 +27,13 @@ class Day7 {
             } else {
                 val currentDirSize = line.split(" ").first().toInt()
                 currentPathSize.add(currentPathSize.removeLast() + currentDirSize)
+                qs+= currentDirSize
             }
         }
         while (currentPath.isNotEmpty()) {
-            val currentDirName = currentPath.removeLast()
             val currentSize = currentPathSize.removeLast()
-            tree[currentDirName] = currentSize
+            tree[currentPath.joinToString("")] = currentSize
+            currentPath.removeLast()
             if (currentSize <= 100000)
                 sum += currentSize
             if (currentPathSize.isNotEmpty()) {
