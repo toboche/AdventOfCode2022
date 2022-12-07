@@ -42,7 +42,7 @@ class Day7 {
         }
         if (findMin) {
             val rootSize = tree["/"]!!
-            val toRemove =  rootSize - 30000000
+            val toRemove =  rootSize - 40000000
             val sortedBy = tree.entries.sortedBy { it.value }
             val toReturn = sortedBy.first { it.value >= toRemove }.value
             return toReturn
