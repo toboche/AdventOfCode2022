@@ -26,7 +26,7 @@ class Day8Test {
             .lines()
 
         assertEquals(
-            1086293,
+            1812,
             Day8().task1(input)
         )
     }
