@@ -18,7 +18,7 @@ class Day9Test {
             .lines()
         assertEquals(
             13,
-            Day9().task1(input)
+            Day9().task1(input, 1)
         )
     }
 
@@ -31,7 +31,7 @@ class Day9Test {
         //5764 - wrong
         assertEquals(
             5513,
-            Day9().task1(input)
+            Day9().task1(input, 1)
         )
     }
 
@@ -46,7 +46,7 @@ class Day9Test {
                 "L 5\n" +
                 "R 2")
             .lines()
-        val actual = Day9().task1Internal(input)
+        val actual = Day9().task1Internal(input, 1)
         val xMax = actual.maxBy { it.first }.first
         val yMax = actual.maxBy { it.second }.second + 1
         val visual = (0..xMax).map { x ->
@@ -63,10 +63,10 @@ class Day9Test {
             .asReversed()
             .joinToString("\n")
 
-        assertEquals(
-            13,
-            actual.count()
-        )
+//        assertEquals(
+//            13,
+//            actual.count()
+//        )
 
         assertEquals(
             "..##..\n" +
