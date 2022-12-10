@@ -28,35 +28,17 @@ class Day9 {
                     'R' -> 1 to 0
                     else -> throw Exception()
                 }
-
                 head = head.first + vector.first to head.second + vector.second
 
                 val xDiff = head.first - tail.first
                 val yDiff = head.second - tail.second
                 val toMove = abs(xDiff) + abs(yDiff)
-                if (toMove > 1 && !(abs(xDiff) ==1 && abs(yDiff)==1)) {
-                    //                if (yDiff == 0) {
-                    //                    tail.copy(first = tail.first + xDiff)
-                    //                } else if (xDiff == 0) {
-                    //                    tail.copy(second = tail.second + yDiff)
-                    //                }else{
+                if (toMove > 1 && !(abs(xDiff) == 1 && abs(yDiff) == 1)) {
                     val xMove = if (xDiff == 0) 0 else if (xDiff >= 1) 1 else -1
                     val yMove = if (yDiff == 0) 0 else if (yDiff >= 1) 1 else -1
                     tail = tail.first + xMove to tail.second + yMove
                     visited.add(tail)
-                    //                }
                 }
-                //            val dst = sqrt(
-                //                (1 shl (head.first - tail.first) + (1 shl head.second - tail.second)).toDouble()
-                //            )
-
-
-                //            if (head.first == tail.first || head.second == tail.second) {
-                //                if()
-                //            }
-                //            if (dst >= 2) {
-                //
-                //            }
             }
 
         }
