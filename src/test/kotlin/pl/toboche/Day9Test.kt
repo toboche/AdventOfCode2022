@@ -104,7 +104,7 @@ class Day9Test {
 
         //5764 - wrong
         assertEquals(
-            5513,
+            2427,
             Day9().task1(input, 9)
         )
     }
