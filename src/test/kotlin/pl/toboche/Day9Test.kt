@@ -48,7 +48,7 @@ class Day9Test {
             .lines()
         val actual = Day9().task1Internal(input)
         val xMax = actual.maxBy { it.first }.first
-        val yMax = actual.maxBy { it.second }.second + 2
+        val yMax = actual.maxBy { it.second }.second + 1
         val visual = (0..xMax).map { x ->
             (0..yMax).map { y ->
                 if (x == 0 && y == 0) {
