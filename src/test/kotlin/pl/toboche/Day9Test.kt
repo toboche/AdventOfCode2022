@@ -63,10 +63,10 @@ class Day9Test {
             .asReversed()
             .joinToString("\n")
 
-//        assertEquals(
-//            13,
-//            actual.count()
-//        )
+        assertEquals(
+            13,
+            actual.count()
+        )
 
         assertEquals(
             "..##..\n" +
@@ -77,5 +77,35 @@ class Day9Test {
             visual
         )
 
+    }
+
+    @Test
+    fun task2Example1() {
+        val input = ("R 4\n" +
+                "U 4\n" +
+                "L 3\n" +
+                "D 1\n" +
+                "R 4\n" +
+                "D 1\n" +
+                "L 5\n" +
+                "R 2")
+            .lines()
+        assertEquals(
+            1,
+            Day9().task1(input, 9)
+        )
+    }
+
+    @Test
+    fun task2() {
+        val input = File("src/test/resources/Day9Task1.txt")
+            .readText()
+            .lines()
+
+        //5764 - wrong
+        assertEquals(
+            5513,
+            Day9().task1(input, 9)
+        )
     }
 }

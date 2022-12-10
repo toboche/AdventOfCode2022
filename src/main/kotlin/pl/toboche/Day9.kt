@@ -39,8 +39,8 @@ class Day9 {
                             val yMove = if (yDiff == 0) 0 else if (yDiff >= 1) 1 else -1
                             rope[tailIndex] = tail.first + xMove to tail.second + yMove
                         }
-                        visited.add(rope[tailIndex])
                     }
+                visited.add(rope[lenght])
             }
 
         }
