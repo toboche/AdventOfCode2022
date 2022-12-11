@@ -13,7 +13,7 @@ class Day10Test {
             .lines()
         assertEquals(
             0,
-            Day10().task1(input)
+            Day10().task1(input).first
         )
     }
 
@@ -23,10 +23,9 @@ class Day10Test {
             .readText()
             .lines()
 
-        //5764 - wrong
         assertEquals(
             13140,
-            Day10().task1(input)
+            Day10().task1(input).first
         )
     }
 
@@ -36,10 +35,28 @@ class Day10Test {
             .readText()
             .lines()
 
-        //5764 - wrong
         assertEquals(
             12640,
-            Day10().task1(input)
+            Day10().task1(input).first
+        )
+    }
+
+    @Test
+    fun task2Example() {
+        val input = File("src/test/resources/day10Example.txt")
+            .readText()
+            .lines()
+
+        val actual = Day10().task1(input).second
+
+        assertEquals(
+            "##..##..##..##..##..##..##..##..##..##..\n" +
+                    "###...###...###...###...###...###...###.\n" +
+                    "####....####....####....####....####....\n" +
+                    "#####.....#####.....#####.....#####.....\n" +
+                    "######......######......######......####\n" +
+                    "#######.......#######.......#######.....",
+            actual
         )
     }
 }

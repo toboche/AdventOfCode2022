@@ -6,7 +6,9 @@ class Day10 {
     object Noop : Instruction
     data class Addx(val value: Int) : Instruction
 
-    fun task1(input: List<String>): Int {
+    fun task1(input: List<String>): Pair<Int, String> {
+        val screen = mutableListOf<Char>()
+        var currentPixelPosition = 0
         return (input.flatMap {
             if (it == "noop") {
                 listOf<Instruction>(Noop)
@@ -16,10 +18,24 @@ class Day10 {
             }
         })
             .runningFold(1) { acc, instruction ->
-                when (instruction) {
+                val currentXValue = when (instruction) {
                     Noop -> acc
                     is Addx -> acc + instruction.value
                 }
+
+                if (acc == currentPixelPosition % 40 ||
+                    acc == (currentPixelPosition % 40) - 1 ||
+                    acc == (currentPixelPosition % 40) + 1
+                ) {
+                    screen.add('#')
+                } else {
+                    screen.add('.')
+                }
+                if (((currentPixelPosition + 1) % 40 == 0 && currentPixelPosition != 0)) {
+                    screen.add('\n')
+                }
+                currentPixelPosition += 1
+                currentXValue
             }
             .withIndex()
             .filter { (index, _) ->
@@ -27,6 +43,6 @@ class Day10 {
             }
             .sumOf { (index, i) ->
                 (index + 1) * i
-            }
+            } to screen.joinToString("").dropLast(1)
     }
 }
