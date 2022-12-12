@@ -10,11 +10,11 @@ class Day11 {
         val divisibleBy: BigInteger,
         val trueResultNextMonkey: Int,
         val falseResultNextMonkey: Int,
-        val inspections: Int,
+        val inspections: Long,
     )
 
     sealed interface Operation {
-        fun calculate(x: BigInteger): BigInteger
+        fun calculate(x: BigInteger, decreaseWorry: Boolean): BigInteger
 
         companion object {
             fun parse(input: String): Operation {
@@ -33,26 +33,28 @@ class Day11 {
         }
 
         class Add(val op: BigInteger) : Operation {
-            override fun calculate(x: BigInteger): BigInteger {
+            override fun calculate(x: BigInteger, decreaseWorry: Boolean): BigInteger {
                 return x + op
             }
         }
 
         class Multiply(val op: BigInteger) : Operation {
-            override fun calculate(x: BigInteger): BigInteger {
+            override fun calculate(x: BigInteger, decreaseWorry: Boolean): BigInteger {
                 return x * op
+
             }
         }
 
         object Power : Operation {
-            override fun calculate(x: BigInteger): BigInteger {
+            override fun calculate(x: BigInteger, decreaseWorry: Boolean): BigInteger {
                 return x * x
+
             }
         }
     }
 
 
-    fun task1(input: List<String>, count: Int): Int {
+    fun task1(input: List<String>, count: Int, decreaseWorry: Boolean = true): Long {
         return input.windowed(7, 7, true)
             .map { (monkeyString, startingItemsString, operationString, testString, trueString, falseString) ->
                 Monkey(
@@ -64,13 +66,24 @@ class Day11 {
                     0,
                 )
             }.let {
-                var monkeys = it.toMutableList()
+                val monkeys = it.toMutableList()
+                val lcm = it.map { it.divisibleBy }.fold(BigInteger.ONE) { acc, it -> acc * it }
                 repeat(count) {
+                    if (it % 1000 == 0) {
+                        println(it)
+                    }
                     for (i in monkeys.indices) {
                         val monkey = monkeys[i]
                         val inspections = monkey.items.count()
                         monkey.items.forEach { item ->
-                            val newValue = monkey.operation.calculate(item) / 3.toBigInteger()
+                            val newValue = monkey.operation.calculate(item, decreaseWorry)
+                                .let {
+                                    if (decreaseWorry) {
+                                        it / 3.toBigInteger()
+                                    } else {
+                                        it % lcm
+                                    }
+                                }
                             if (newValue % monkey.divisibleBy == BigInteger.ZERO) {
                                 monkeys[monkey.trueResultNextMonkey] =
                                     monkeys[monkey.trueResultNextMonkey].copy(items = monkeys[monkey.trueResultNextMonkey].items + newValue)
@@ -81,12 +94,12 @@ class Day11 {
                         }
 
                         val newMonkey = monkey.copy(
-                            items = emptyList(), inspections = monkey.inspections + inspections
+                            items = emptyList(), inspections = monkey.inspections + inspections.toLong()
                         )
                         monkeys[i] = newMonkey
                     }
                 }
-                monkeys.sortedBy { -it.inspections }.let { it[0].inspections * it[1].inspections }
+                monkeys.sortedBy { -it.inspections }.let { it[0].inspections.toLong() * it[1].inspections.toLong() }
             }
     }
 }

@@ -28,4 +28,30 @@ class Day11Test {
             Day11().task1(input, 20)
         )
     }
+
+    @Test
+    fun task2Example() {
+        val input = File("src/test/resources/day11Example.txt")
+            .readText()
+            .lines()
+
+        assertEquals(
+            2713310158,
+            Day11().task1(input, 10000, false)
+        )
+    }
+
+    @Test
+    fun task2() {
+        val input = File("src/test/resources/day11Task.txt")
+            .readText()
+            .lines()
+
+        //32396760077 too high
+        //32390460700 too high
+        assertEquals(
+            29703395016,
+            Day11().task1(input, 10000, false)
+        )
+    }
 }
