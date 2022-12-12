@@ -13,7 +13,7 @@ class Day11Test {
 
         assertEquals(
             10605,
-            Day11().task1(input)
+            Day11().task1(input, 20)
         )
     }
 
@@ -25,7 +25,7 @@ class Day11Test {
 
         assertEquals(
             113232,
-            Day11().task1(input)
+            Day11().task1(input, 20)
         )
     }
 }

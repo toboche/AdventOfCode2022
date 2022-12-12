@@ -1,75 +1,77 @@
 package pl.toboche
 
+import java.math.BigInteger
+
 class Day11 {
 
     data class Monkey(
-        val items: List<Int>,
+        val items: List<BigInteger>,
         val operation: Operation,
-        val divisibleBy: Int,
+        val divisibleBy: BigInteger,
         val trueResultNextMonkey: Int,
         val falseResultNextMonkey: Int,
         val inspections: Int,
     )
 
     sealed interface Operation {
-        fun calculate(x: Int): Int
+        fun calculate(x: BigInteger): BigInteger
 
         companion object {
             fun parse(input: String): Operation {
                 val beginning = input.substringAfter("Operation: new = old ").first()
                 val after = input.substringAfter("Operation: new = old ").drop(2)
                 return if (beginning == '+') {
-                    Add(after.toInt())
+                    Add(after.toBigInteger())
                 } else if (beginning == '*' && after == "old") {
                     Power
                 } else if (beginning == '*') {
-                    Multiply(after.toInt())
+                    Multiply(after.toBigInteger())
                 } else {
                     throw Exception()
                 }
             }
         }
 
-        class Add(val op: Int) : Operation {
-            override fun calculate(x: Int): Int {
+        class Add(val op: BigInteger) : Operation {
+            override fun calculate(x: BigInteger): BigInteger {
                 return x + op
             }
         }
 
-        class Multiply(val op: Int) : Operation {
-            override fun calculate(x: Int): Int {
+        class Multiply(val op: BigInteger) : Operation {
+            override fun calculate(x: BigInteger): BigInteger {
                 return x * op
             }
         }
 
         object Power : Operation {
-            override fun calculate(x: Int): Int {
+            override fun calculate(x: BigInteger): BigInteger {
                 return x * x
             }
         }
     }
 
 
-    fun task1(input: List<String>): Int {
+    fun task1(input: List<String>, count: Int): Int {
         return input.windowed(7, 7, true)
             .map { (monkeyString, startingItemsString, operationString, testString, trueString, falseString) ->
                 Monkey(
-                    startingItemsString.split(": ")[1].split(", ").map { it.toInt() },
+                    startingItemsString.split(": ")[1].split(", ").map { it.toBigInteger() },
                     Operation.parse(operationString),
-                    testString.substringAfter("Test: divisible by ").toInt(),
+                    testString.substringAfter("Test: divisible by ").toBigInteger(),
                     trueString.substringAfter("If true: throw to monkey ").toInt(),
                     falseString.substringAfter("If false: throw to monkey ").toInt(),
                     0,
                 )
             }.let {
                 var monkeys = it.toMutableList()
-                repeat(20) {
+                repeat(count) {
                     for (i in monkeys.indices) {
                         val monkey = monkeys[i]
                         val inspections = monkey.items.count()
                         monkey.items.forEach { item ->
-                            val newValue = monkey.operation.calculate(item) / 3
-                            if (newValue % monkey.divisibleBy == 0) {
+                            val newValue = monkey.operation.calculate(item) / 3.toBigInteger()
+                            if (newValue % monkey.divisibleBy == BigInteger.ZERO) {
                                 monkeys[monkey.trueResultNextMonkey] =
                                     monkeys[monkey.trueResultNextMonkey].copy(items = monkeys[monkey.trueResultNextMonkey].items + newValue)
                             } else {
