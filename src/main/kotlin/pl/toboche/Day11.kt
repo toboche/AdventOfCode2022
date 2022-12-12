@@ -53,7 +53,6 @@ class Day11 {
         }
     }
 
-
     fun task1(input: List<String>, count: Int, decreaseWorry: Boolean = true): Long {
         return input.windowed(7, 7, true)
             .map { (monkeyString, startingItemsString, operationString, testString, trueString, falseString) ->
