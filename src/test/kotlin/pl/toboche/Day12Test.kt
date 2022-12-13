@@ -18,4 +18,16 @@ class Day12Test {
             Day12().task1(input)
         )
     }
+
+    @Test
+    fun task1() {
+        val input = File("src/test/resources/day12Task.txt")
+            .readText()
+            .lines()
+
+        assertEquals(
+            490,
+            Day12().task1(input)
+        )
+    }
 }

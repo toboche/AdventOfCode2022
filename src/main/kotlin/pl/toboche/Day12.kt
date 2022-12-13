@@ -24,19 +24,18 @@ class Day12 {
 
         while (queue.isNotEmpty()) {
             val u = findMinDistance(dist, queue)
+            if (u == -1 to -1) {
+                break
+            }
             queue.remove(u)
 
-            val currentHeight = map[u.first][u.second].let {
-                if (it == 'S') 'a' else if (it == 'E') 'z' else it
-            }
+            val currentHeight = charHeight(map, u)!!
             listOf(0 to 1, 0 to -1, 1 to 0, -1 to 0)
                 .map { it.copy(it.first + u.first, it.second + u.second) }
-                .map { vector ->
-                    map.getOrNull(vector.first)?.getOrNull(vector.second)?.let {
-                        if (it == 'S') 'a' else if (it == 'E') 'z' else it
-                    }?.let { it to vector }
+                .map { coords ->
+                    charHeight(map, coords)?.let { it to coords }
                 }.filterNotNull()
-                .filter { abs(it.first - currentHeight) <= 1 }
+                .filter { currentHeight - it.first >= -1 && queue.contains(it.second) }
                 .forEach {
                     if (dist[u.first][u.second] + 1 < dist[it.second.first][it.second.second]) {
                         dist[it.second.first][it.second.second] = dist[u.first][u.second] + 1
@@ -48,19 +47,25 @@ class Day12 {
 
         val E = find(input, 'E')
         var prevItem: Pair<Int, Int>? = E
-        var count = -1
-        while (prevItem != null) {
-            prevItem = prev[prevItem.first][prevItem.second]
+        var count = 0
+        while (prevItem != S) {
+            prevItem = prev[prevItem!!.first][prevItem.second]
             count += 1
         }
         return count
     }
 
+    private fun charHeight(map: Array<CharArray>, vector: Pair<Int, Int>): Char? {
+        return map.getOrNull(vector.first)?.getOrNull(vector.second)?.let {
+            if (it == 'S') 'a' else if (it == 'E') 'z' else it
+        }
+    }
+
     private fun findMinDistance(dist: Array<IntArray>, queue: MutableList<Pair<Int, Int>>): Pair<Int, Int> {
-        var minDist: Int? = null
+        var minDist: Int = Int.MAX_VALUE
         var mindDistItem = -1 to -1
         for (queueItem in queue) {
-            if (minDist == null || dist[queueItem.first][queueItem.second] < minDist) {
+            if (dist[queueItem.first][queueItem.second] < minDist && dist[queueItem.first][queueItem.second] != Int.MAX_VALUE) {
                 minDist = dist[queueItem.first][queueItem.second]
                 mindDistItem = queueItem
             }
