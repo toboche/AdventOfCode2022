@@ -30,4 +30,19 @@ class Day12Test {
             Day12().task1(input)
         )
     }
+
+    @Test
+    fun task2Example() {
+        val input = ("Sabqponm\n" +
+                "abcryxxl\n" +
+                "accszExk\n" +
+                "acctuvwj\n" +
+                "abdefghi")
+            .lines()
+        assertEquals(
+            29,
+            Day12().task2(input, true)
+        )
+    }
+
 }

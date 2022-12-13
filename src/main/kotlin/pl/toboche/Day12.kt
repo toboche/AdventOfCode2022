@@ -5,11 +5,20 @@ import kotlin.math.min
 
 class Day12 {
 
-    fun task1(input: List<String>): Int {
+    fun task1(input: List<String>, anySquare: Boolean = false): Int {
         val map = input.map { it.toCharArray() }.toTypedArray()
         val Sx = input.withIndex().first { it.value.contains('S') }.index
         val Sy = input[Sx].indexOf('S')
         val S = Sx to Sy
+        return task1Internal(input, S, map, anySquare)
+    }
+
+    private fun task1Internal(
+        input: List<String>,
+        S: Pair<Int, Int>,
+        map: Array<CharArray>,
+        anySquare: Boolean
+    ): Int {
         val dist = Array(input.size) { _ -> IntArray(input[0].length) { _ -> Int.MAX_VALUE } }
         val prev = Array(input.size) { _ -> Array<Pair<Int, Int>?>(input[0].length) { _ -> null } }
         val queue = mutableListOf<Pair<Int, Int>>()
@@ -35,7 +44,11 @@ class Day12 {
                 .map { coords ->
                     charHeight(map, coords)?.let { it to coords }
                 }.filterNotNull()
-                .filter { currentHeight - it.first >= -1 && queue.contains(it.second) }
+                .filter {
+                    ((anySquare && currentHeight >= it.first) || currentHeight - it.first >= -1) && queue.contains(
+                        it.second
+                    )
+                }
                 .forEach {
                     if (dist[u.first][u.second] + 1 < dist[it.second.first][it.second.second]) {
                         dist[it.second.first][it.second.second] = dist[u.first][u.second] + 1
@@ -77,5 +90,22 @@ class Day12 {
         val Sx = input.withIndex().first { it.value.contains(char) }.index
         val Sy = input[Sx].indexOf(char)
         return Pair(Sx, Sy)
+    }
+
+    fun task2(input: List<String>, anySquare: Boolean = false): Int {
+        val map = input.map { it.toCharArray() }.toTypedArray()
+        val a = mutableListOf<Pair<Int, Int>>()
+        for (x in input.indices) {
+            val line = input[x]
+            for (y in line.indices) {
+                if (map[x][y] == 'a') {
+                    a.add(x to y)
+                }
+            }
+        }
+        val Sx = input.withIndex().first { it.value.contains('S') }.index
+        val Sy = input[Sx].indexOf('S')
+        val S = Sx to Sy
+        return (a + S).map { task1Internal(input, it, map, anySquare) }.min()
     }
 }
