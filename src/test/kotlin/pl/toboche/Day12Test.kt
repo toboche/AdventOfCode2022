@@ -52,7 +52,7 @@ class Day12Test {
             .lines()
 
         assertEquals(
-            490,
+            488,
             Day12().task2(input)
         )
     }
