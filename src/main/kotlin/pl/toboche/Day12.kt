@@ -10,7 +10,7 @@ class Day12 {
         val Sx = input.withIndex().first { it.value.contains('S') }.index
         val Sy = input[Sx].indexOf('S')
         val S = Sx to Sy
-        return task1Internal(input, S, map, anySquare)
+        return task1Internal(input, S, map, anySquare)[S]!!
     }
 
     private fun task1Internal(
@@ -18,7 +18,7 @@ class Day12 {
         S: Pair<Int, Int>,
         map: Array<CharArray>,
         anySquare: Boolean
-    ): Int {
+    ): Map<Pair<Int,Int>, Int> {
         val dist = Array(input.size) { _ -> IntArray(input[0].length) { _ -> Int.MAX_VALUE } }
         val prev = Array(input.size) { _ -> Array<Pair<Int, Int>?>(input[0].length) { _ -> null } }
         val queue = mutableListOf<Pair<Int, Int>>()
@@ -59,13 +59,20 @@ class Day12 {
         }
 
         val E = find(input, 'E')
+        if (prev[E.first][E.second] == null) {
+            return emptyMap()
+        }
         var prevItem: Pair<Int, Int>? = E
         var count = 0
+        val asToCount = mutableMapOf<Pair<Int, Int>, Int>()
         while (prevItem != S) {
             prevItem = prev[prevItem!!.first][prevItem.second]
             count += 1
+            if (prevItem != null && charHeight(map,prevItem) == 'a') {
+                asToCount[prevItem] = count
+            }
         }
-        return count
+        return asToCount
     }
 
     private fun charHeight(map: Array<CharArray>, vector: Pair<Int, Int>): Char? {
@@ -106,6 +113,17 @@ class Day12 {
         val Sx = input.withIndex().first { it.value.contains('S') }.index
         val Sy = input[Sx].indexOf('S')
         val S = Sx to Sy
-        return (a + S).map { task1Internal(input, it, map, anySquare) }.min()
+        val currentAs = (a + S).toMutableList()
+        var min = Int.MAX_VALUE
+        while (currentAs.isNotEmpty()) {
+            val allCounts = task1Internal(input, currentAs.first(), map, anySquare)
+            if (allCounts.isEmpty()) {
+                currentAs.removeFirst()
+                continue
+            }
+            currentAs.removeAll(allCounts.keys)
+            min = min(min, allCounts.values.min())
+        }
+        return min
     }
 }
