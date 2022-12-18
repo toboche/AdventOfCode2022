@@ -20,6 +20,7 @@ class Day13Test {
             Day13().mapToList("[1,2,3]").first
         )
     }
+
     @Test
     fun task1ExampleParsing3() {
         assertEquals(
@@ -54,6 +55,18 @@ class Day13Test {
                 "[1,[2,[3,[4,[5,6,7]]]],8,9]\n" +
                 "[1,[2,[3,[4,[5,6,0]]]],8,9]")
             .lines()
+        assertEquals(
+            13,
+            Day13().task1(input, true)
+        )
+    }
+
+    @Test
+    fun task1() {
+        val input = File("src/test/resources/day13Task.txt")
+            .readText()
+            .lines()
+
         assertEquals(
             13,
             Day13().task1(input, true)
