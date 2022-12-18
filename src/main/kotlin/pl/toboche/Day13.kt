@@ -2,7 +2,7 @@ package pl.toboche
 
 class Day13 {
 
-    fun task1(input: List<String>, anySquare: Boolean = false): Int {
+    fun task1(input: List<String>): Int {
         val topLines = input.windowed(3, 3, true)
             .map { it[0] to it[1] }
             .map { mapToList(it.first).first to mapToList(it.second).first }
@@ -15,6 +15,22 @@ class Day13 {
             }.sum()
 
         return topLines
+    }
+
+    fun task2(input: List<String>): Int {
+        val dividerOneIndex = input.filter { it.isNotEmpty() }
+            .map { mapToList(it).first }
+            .count {
+                compare(mapToList("[[2]]").first, it) <= 0
+            } + 1
+
+        val dividerTwoIndex = input.filter { it.isNotEmpty() }
+            .map { mapToList(it).first }
+            .count {
+                compare(mapToList("[[6]]").first, it) <= 0
+            } + 2
+
+        return dividerOneIndex * dividerTwoIndex
     }
 
     private fun compare(left: List<Any>, right: List<Any>): Int {
