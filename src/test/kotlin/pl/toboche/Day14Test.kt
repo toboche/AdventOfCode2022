@@ -28,5 +28,15 @@ class Day14Test {
         )
     }
 
+    @Test
+    fun task2Example() {
+        val input = ("498,4 -> 498,6 -> 496,6\n" +
+                "503,4 -> 502,4 -> 502,9 -> 494,9")
+            .lines()
 
+        assertEquals(
+            93,
+            Day14().task2(input)
+        )
+    }
 }

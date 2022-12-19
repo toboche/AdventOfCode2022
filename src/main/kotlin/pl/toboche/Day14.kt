@@ -6,6 +6,75 @@ class Day14 {
 
     fun task1(input: List<String>): Int {
         //x,y
+        val pair = parseInput(input)
+        val map = pair.first
+        val lowest = pair.second
+        var counter = 0
+        var currentX = 500
+        var currentY = 0
+        while (currentY < lowest) {
+            if (isFree(map, currentX, currentY + 1)) {
+                currentY += 1
+                continue
+            } else if (isFree(map, currentX - 1, currentY + 1)) {
+                currentX -= 1
+                currentY += 1
+            } else if (isFree(map, currentX + 1, currentY + 1)) {
+                currentX += 1
+                currentY += 1
+            } else {
+                addPointToMap(map, currentX, currentY)
+                currentX = 500
+                currentY = 0
+                counter += 1
+                printMap(map)
+            }
+        }
+        return counter
+    }
+
+    fun task2(input: List<String>): Int {
+        //x,y
+        val pair = parseInput(input)
+        val map = pair.first
+        val lowest = pair.second
+        val floor = lowest + 2
+        var counter = 0
+        var currentX = 500
+        var currentY = 0
+        while (true) {
+            if (currentY + 1 == floor) {
+                addPointToMap(map, currentX, currentY)
+                currentX = 500
+                currentY = 0
+                counter += 1
+                printMap(map)
+                continue
+            } else if (isFree(map, currentX, currentY + 1)) {
+                currentY += 1
+                continue
+            } else if (isFree(map, currentX - 1, currentY + 1)) {
+                currentX -= 1
+                currentY += 1
+            } else if (isFree(map, currentX + 1, currentY + 1)) {
+                currentX += 1
+                currentY += 1
+            } else {
+                addPointToMap(map, currentX, currentY)
+                if (currentY == 0) {
+                    counter += 1
+                    break
+                }
+                currentX = 500
+                currentY = 0
+                counter += 1
+                printMap(map)
+            }
+        }
+        return counter
+    }
+
+    private fun parseInput(input: List<String>): Pair<MutableMap<Int, MutableSet<Int>>, Int> {
         val map = mutableMapOf<Int, MutableSet<Int>>()
         var lowest = 0
         input.forEach { line ->
@@ -38,28 +107,7 @@ class Day14 {
                     }
                 }
         }
-        var counter = 0
-        var currentX = 500
-        var currentY = 0
-        while (currentY < lowest) {
-            if (isFree(map, currentX, currentY+1)) {
-                currentY += 1
-                continue
-            } else if (isFree(map, currentX - 1, currentY +1 )) {
-                currentX -= 1
-                currentY += 1
-            } else if (isFree(map, currentX + 1, currentY + 1)) {
-                currentX += 1
-                currentY += 1
-            } else {
-                addPointToMap(map, currentX, currentY)
-                currentX = 500
-                currentY = 0
-                counter += 1
-                printMap(map)
-            }
-        }
-        return counter
+        return Pair(map, lowest)
     }
 
     private fun printMap(map: MutableMap<Int, MutableSet<Int>>) {
