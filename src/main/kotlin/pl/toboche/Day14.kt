@@ -19,7 +19,7 @@ class Day14 {
                 .forEach { it ->
                     val start = it[0]
                     val end = it[1]
-                    lowest = max(start.second, end.second)
+                    lowest = max(lowest, max(start.second, end.second))
                     val xVector = if (start.first < end.first) {
                         start.first.rangeTo(end.first)
                     } else {
